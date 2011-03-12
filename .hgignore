@@ -1,0 +1,12 @@
+.*\.pyc$
+.*\.swp$
+.*\.swo$
+.*\.log$
+.*\.pid$
+.*/build/
+.*\.DS_Store
+.*\.pbxuser$
+.*\.mode1v3$
+.*\.perspectivev3$
+
+.*\.xcuserdatad
