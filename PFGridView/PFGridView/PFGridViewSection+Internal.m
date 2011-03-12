@@ -86,11 +86,11 @@
 }
 
 - (NSSet *)hideUnvisibleCells:(UIScrollView *)scrollView {
-    //Make a bigger buffer here.
-    CGRect visibleRect = CGRectMake(scrollView.contentOffset.x - scrollView.frame.size.width / 2.0f,
-                                    scrollView.contentOffset.y - scrollView.frame.size.height / 2.0f,
-                                    scrollView.frame.size.width * 2.0f,
-                                    scrollView.frame.size.height * 2.0f);
+    //showing some extra cells, for a better animation effects
+    CGRect visibleRect = CGRectMake(scrollView.contentOffset.x - owner.cellHeight,
+                                    scrollView.contentOffset.y - owner.cellHeight,
+                                    scrollView.frame.size.width + owner.cellHeight * 2.0f,
+                                    scrollView.frame.size.height + owner.cellHeight * 2.0f);
     
     int count = 0;
     NSMutableSet *result = [NSMutableSet set];
