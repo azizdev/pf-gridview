@@ -22,6 +22,7 @@
 
 //internal usage
 - (void)setupScrollView:(UIScrollView *)scrollView;
+- (void)clearScrollView:(UIScrollView *)scrollView;
 
 - (PFGridIndexPath *)indexPathForCol:(NSUInteger)col inRow:(NSUInteger)row;
 

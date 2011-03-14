@@ -14,6 +14,9 @@
 
 #pragma mark - Used by PFGridView
 - (void)reloadData {
+    [self clearScrollView:headerView];
+    [self clearScrollView:gridView];
+    
     id<PFGridViewDataSource> dataSource = owner.dataSource;
     if (dataSource == nil) {
         return;
@@ -75,6 +78,14 @@
     scrollView.scrollEnabled = YES;
     scrollView.scrollsToTop = (scrollView == gridView);
     [self addSubview:scrollView];
+}
+
+- (void)clearScrollView:(UIScrollView *)scrollView {
+    for (UIView *view in [[scrollView.subviews copy] autorelease]) {
+        if ([[view class] isSubclassOfClass:[PFGridViewCell class]]) {
+            [view removeFromSuperview];
+        }
+    }    
 }
 
 - (PFGridIndexPath *)indexPathForCol:(NSUInteger)col inRow:(NSUInteger)row {
