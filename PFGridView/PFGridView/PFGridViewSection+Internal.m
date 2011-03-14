@@ -36,9 +36,7 @@
     
     headerView.contentSize = CGSizeMake(gridWidth, owner.headerHeight);
     gridView.contentSize = CGSizeMake(gridWidth, owner.cellHeight * numberOfRow);
-    
-    gridView.scrollsToTop = (sectionIndex == 0);
-    
+        
     [self scrollViewDidScroll:headerView];
     [self scrollViewDidScroll:gridView];
 }
@@ -75,7 +73,7 @@
     scrollView.clipsToBounds = YES;
     scrollView.directionalLockEnabled = owner.directionalLockEnabled;
     scrollView.scrollEnabled = YES;
-    scrollView.scrollsToTop = NO;
+    scrollView.scrollsToTop = (scrollView == gridView);
     [self addSubview:scrollView];
 }
 
