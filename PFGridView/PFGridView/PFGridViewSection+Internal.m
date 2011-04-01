@@ -181,7 +181,8 @@
             hasMoreRow = NO;
         } else {
             row++;
-            if (row * owner.cellHeight > scrollView.contentOffset.y + scrollView.frame.size.height) {
+            if (row * owner.cellHeight > scrollView.contentOffset.y + scrollView.frame.size.height 
+                || row >= numberOfRow) {
                 hasMoreRow = NO;
             }
         }

@@ -114,17 +114,18 @@
 - (void)selectCellAtIndexPath:(PFGridIndexPath *)indexPath animated:(BOOL)animated scrollPosition:(PFGridViewScrollPosition)scrollPosition {
     if (indexPath == nil || [indexPath isEqual:selectedCellIndexPath]) return;
 
-    if (selectedCellIndexPath) {
-        if (delegate && [delegate respondsToSelector:@selector(gridView:didDeselectCellAtIndexPath:)]) {
-            [delegate gridView:self didDeselectCellAtIndexPath:selectedCellIndexPath];
-        }
-        [selectedCellIndexPath release];
-        selectedCellIndexPath = nil;
-    }
-    
+    PFGridIndexPath *oldSelectedCellIndexPath = selectedCellIndexPath;
     selectedCellIndexPath = [indexPath retain];
     
-    if (delegate && [delegate respondsToSelector:@selector(gridView:didDeselectCellAtIndexPath:)]) {
+    if (oldSelectedCellIndexPath) {
+        if (delegate && [delegate respondsToSelector:@selector(gridView:didDeselectCellAtIndexPath:)]) {
+            [delegate gridView:self didDeselectCellAtIndexPath:oldSelectedCellIndexPath];
+        }
+        [oldSelectedCellIndexPath release];
+        oldSelectedCellIndexPath = nil;
+    }
+    
+    if (delegate && [delegate respondsToSelector:@selector(gridView:didSelectCellAtIndexPath:)]) {
         [delegate gridView:self didSelectCellAtIndexPath:selectedCellIndexPath];
     }
     [self scrollToCellAtIndexPath:selectedCellIndexPath animated:animated scrollPosition:scrollPosition];

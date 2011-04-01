@@ -50,6 +50,7 @@
 
 - (void)setNormalBackgroundColor:(UIColor *)newNormalBackgroundColor {
     if (normalBackgroundColor == newNormalBackgroundColor) return;
+    [normalBackgroundColor release];
     normalBackgroundColor = [newNormalBackgroundColor retain];
     if (!selected) {
         self.backgroundColor = normalBackgroundColor;
@@ -58,6 +59,7 @@
 
 - (void)setSelectedBackgroundColor:(UIColor *)newSelectedBackgroundColor {
     if (selectedBackgroundColor == newSelectedBackgroundColor) return;
+    [selectedBackgroundColor release];
     selectedBackgroundColor = [newSelectedBackgroundColor retain];
     if (selected) {
         self.backgroundColor = selectedBackgroundColor;
