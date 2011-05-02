@@ -34,6 +34,7 @@
 - (PFGridIndexPath *)gridView:(PFGridView *)gridView didSelectCellAtIndexPath:(PFGridIndexPath *)indexPath;
 - (PFGridIndexPath *)gridView:(PFGridView *)gridView willDeselectCellAtIndexPath:(PFGridIndexPath *)indexPath;
 - (PFGridIndexPath *)gridView:(PFGridView *)gridView didDeselectCellAtIndexPath:(PFGridIndexPath *)indexPath;
+- (void)gridView:(PFGridView *)gridView scrollToOffsetY:(CGFloat)offsetY;
 @end
 
 typedef enum {
@@ -92,6 +93,10 @@ typedef enum {
 - (PFGridViewCell *)headerForColAtIndexPath:(PFGridIndexPath *)indexPath;
 
 - (PFGridIndexPath *)indexPathForSelectedCell;
-- (void)selectCellAtIndexPath:(PFGridIndexPath *)indexPath animated:(BOOL)animated scrollPosition:(PFGridViewScrollPosition)scrollPosition;
+
+//will not trigger (de)select event, scrollPosition not implemented yet, only none/top supported
+- (void)selectCellAtIndexPath:(PFGridIndexPath *)indexPath animated:(BOOL)animated scrollPosition:(PFGridViewScrollPosition)scrollPosition; 
+//will not trigger scrollToOffsetY event, scrollPosition not implemented yet, , only none/top supported
+- (void)scrollToCellAtIndexPath:(PFGridIndexPath *)indexPath animated:(BOOL)animated scrollPosition:(PFGridViewScrollPosition)scrollPosition;
 
 @end

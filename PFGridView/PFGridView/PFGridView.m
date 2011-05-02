@@ -38,9 +38,12 @@
     headerHeight = 44.0f;
     cellHeight = 44.0f;    
     
+    snapToGrid = NO;
     snapToGridAnamationDuration = 0.1f;
     selectAnamationDuration = 0.2f;
     selectAnimated = YES;
+    
+    selectMode = PFGridViewSelectModeRow;
     
     [self setupGestures];
 }
@@ -114,22 +117,32 @@
 - (void)selectCellAtIndexPath:(PFGridIndexPath *)indexPath animated:(BOOL)animated scrollPosition:(PFGridViewScrollPosition)scrollPosition {
     if (indexPath == nil || [indexPath isEqual:selectedCellIndexPath]) return;
 
-    PFGridIndexPath *oldSelectedCellIndexPath = selectedCellIndexPath;
+    [selectedCellIndexPath release];
     selectedCellIndexPath = [indexPath retain];
-    
-    if (oldSelectedCellIndexPath) {
-        if (delegate && [delegate respondsToSelector:@selector(gridView:didDeselectCellAtIndexPath:)]) {
-            [delegate gridView:self didDeselectCellAtIndexPath:oldSelectedCellIndexPath];
-        }
-        [oldSelectedCellIndexPath release];
-        oldSelectedCellIndexPath = nil;
-    }
-    
-    if (delegate && [delegate respondsToSelector:@selector(gridView:didSelectCellAtIndexPath:)]) {
-        [delegate gridView:self didSelectCellAtIndexPath:selectedCellIndexPath];
-    }
+
     [self scrollToCellAtIndexPath:selectedCellIndexPath animated:animated scrollPosition:scrollPosition];
 }
 
+- (void)scrollToCellAtIndexPath:(PFGridIndexPath *)indexPath animated:(BOOL)animated scrollPosition:(PFGridViewScrollPosition)scrollPosition {
+    
+    CGFloat offsetY = 0;
+    if (scrollPosition == PFGridViewScrollPositionNone) {
+        for (PFGridViewSection *section in sections) {
+            [section refreshScrollView:section.gridView];
+        } 
+        return;
+    } else {
+        //TODO scrollPosition not implemented
+        offsetY = indexPath.row * cellHeight;
+    }
+    if (animated) {
+        [UIView animateWithDuration:0.2f
+                         animations:^{
+                             [self scrollFromSection:nil offsetY:offsetY];                    
+                         }];
+    } else {
+        [self scrollFromSection:nil offsetY:offsetY];        
+    }
+}
 
 @end

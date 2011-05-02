@@ -39,7 +39,22 @@
             return;
         }
     }
+    
+    PFGridIndexPath *oldSelectedCellIndexPath = [selectedCellIndexPath retain];
+
     [self selectCellAtIndexPath:indexPath animated:YES scrollPosition:PFGridViewScrollPositionNone];
+
+    if (oldSelectedCellIndexPath) {
+        if (delegate && [delegate respondsToSelector:@selector(gridView:didDeselectCellAtIndexPath:)]) {
+            [delegate gridView:self didDeselectCellAtIndexPath:oldSelectedCellIndexPath];
+        }
+        [oldSelectedCellIndexPath release];
+        oldSelectedCellIndexPath = nil;
+    }
+    
+    if (delegate && [delegate respondsToSelector:@selector(gridView:didSelectCellAtIndexPath:)]) {
+        [delegate gridView:self didSelectCellAtIndexPath:selectedCellIndexPath];
+    }
 }
 
 - (PFGridViewSection *)sectionAtPoint:(CGPoint)point {
@@ -77,12 +92,6 @@
         }
     }
     return result;
-}
-
-- (void)scrollToCellAtIndexPath:(PFGridIndexPath *)indexPath animated:(BOOL)animated scrollPosition:(PFGridViewScrollPosition)scrollPosition {
-    for (PFGridViewSection *section in sections) {
-        [section refreshScrollView:section.gridView];
-    }    
 }
 
 - (void)reloadSections {
@@ -147,6 +156,12 @@
     for (PFGridViewSection *oneSection in sections) {
         if (section != oneSection) {
             [oneSection scrollToOffsetY:y];
+        }
+    }
+    if (section) {
+        //section is nil means the call is from outside, then don't call the delegate
+        if (delegate && [delegate respondsToSelector:@selector(gridView:scrollToOffsetY:)]) {
+            [delegate gridView:self scrollToOffsetY:y];
         }
     }
 }

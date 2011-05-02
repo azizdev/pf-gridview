@@ -31,8 +31,6 @@
     [super viewDidLoad];
     demoGridView.cellHeight = 60.0f;
     demoGridView.headerHeight = 60.0f;
-    demoGridView.snapToGrid = YES;
-    demoGridView.selectMode = PFGridViewSelectModeRow;
     [demoGridView reloadData];
 }
 
@@ -115,7 +113,7 @@
     if (gridCell == nil) {
         gridCell = [[[PFGridViewLabelCell alloc] initWithReuseIdentifier:@"LABEL"] autorelease];
         gridCell.textLabel.textAlignment = UITextAlignmentCenter;
-        
+        gridCell.selectedBackgroundColor = [UIColor colorWithRed:0.5 green:0.5 blue:0.8 alpha:1];        
     }
     gridCell.textLabel.text = [NSString stringWithFormat:@"%d-%d", indexPath.row,  indexPath.col];
     gridCell.normalBackgroundColor = [self backgroundColorForIndexPath:indexPath];

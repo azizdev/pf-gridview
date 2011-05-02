@@ -27,7 +27,5 @@
 
 - (PFGridIndexPath *)indexPathForColAtPoint:(CGPoint)point;
 
-- (void)scrollToCellAtIndexPath:(PFGridIndexPath *)indexPath animated:(BOOL)animated scrollPosition:(PFGridViewScrollPosition)scrollPosition;
-
 - (BOOL) isIndexPathSelected:(PFGridIndexPath *)indexPath;
 @end
