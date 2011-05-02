@@ -58,6 +58,8 @@
 
 #pragma mark - public methods;
 - (void)reloadData {
+    [cellQueues removeAllObjects];
+    
     [self reloadSections];
     [self setNeedsDisplay];
 }
@@ -136,7 +138,7 @@
         offsetY = indexPath.row * cellHeight;
     }
     if (animated) {
-        [UIView animateWithDuration:0.2f
+        [UIView animateWithDuration:selectAnamationDuration
                          animations:^{
                              [self scrollFromSection:nil offsetY:offsetY];                    
                          }];

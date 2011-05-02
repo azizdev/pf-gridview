@@ -30,10 +30,10 @@
 @required
 @optional
 - (void)gridView:(PFGridView *)gridView willDisplayCell:(PFGridViewCell *)cell forColAtIndexPath:(PFGridIndexPath *)indexPath;
-- (PFGridIndexPath *)gridView:(PFGridView *)gridView willSelectCellAtIndexPath:(PFGridIndexPath *)indexPath;
-- (PFGridIndexPath *)gridView:(PFGridView *)gridView didSelectCellAtIndexPath:(PFGridIndexPath *)indexPath;
-- (PFGridIndexPath *)gridView:(PFGridView *)gridView willDeselectCellAtIndexPath:(PFGridIndexPath *)indexPath;
-- (PFGridIndexPath *)gridView:(PFGridView *)gridView didDeselectCellAtIndexPath:(PFGridIndexPath *)indexPath;
+- (BOOL)gridView:(PFGridView *)gridView willSelectCellAtIndexPath:(PFGridIndexPath *)indexPath;
+- (void)gridView:(PFGridView *)gridView didSelectCellAtIndexPath:(PFGridIndexPath *)indexPath;
+- (BOOL)gridView:(PFGridView *)gridView willDeselectCellAtIndexPath:(PFGridIndexPath *)indexPath;
+- (void)gridView:(PFGridView *)gridView didDeselectCellAtIndexPath:(PFGridIndexPath *)indexPath;
 - (void)gridView:(PFGridView *)gridView scrollToOffsetY:(CGFloat)offsetY;
 @end
 

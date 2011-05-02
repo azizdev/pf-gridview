@@ -42,7 +42,7 @@
     
     PFGridIndexPath *oldSelectedCellIndexPath = [selectedCellIndexPath retain];
 
-    [self selectCellAtIndexPath:indexPath animated:YES scrollPosition:PFGridViewScrollPositionNone];
+    [self selectCellAtIndexPath:indexPath animated:selectAnimated scrollPosition:PFGridViewScrollPositionNone];
 
     if (oldSelectedCellIndexPath) {
         if (delegate && [delegate respondsToSelector:@selector(gridView:didDeselectCellAtIndexPath:)]) {
