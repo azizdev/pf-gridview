@@ -3,7 +3,7 @@
 //  PFGridView
 //
 //  Created by YJ Park on 3/11/11.
-//  Copyright 2011 Exoweb. All rights reserved.
+//  Copyright 2011 PettyFun.com All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
